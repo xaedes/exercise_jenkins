@@ -7,6 +7,9 @@ pipeline {
     stages {
         stage('BuildTestDeploy') {
             matrix {
+                agent {
+                    label "${PLATFORM}-${TOOLCHAIN}-node"
+                }
                 when {
                     anyOf {
                         expression { params.PLATFORM_FILTER == 'all' }
@@ -18,37 +21,52 @@ pipeline {
                         name 'PLATFORM'
                         values 'linux', 'win'
                     }
+                    axis {
+                        name 'TOOLCHAIN'
+                        values 'ubuntu-focal', 'vs19-vcpkg'
+                    }
+                }
+                excludes {
+                    exclude {
+                        axis {
+                            name 'PLATFORM'
+                            values 'linux'
+                        }
+                        axis {
+                            name 'TOOLCHAIN'
+                            values 'vs19-vcpkg'
+                        }
+                    }
+                    exclude {
+                        axis {
+                            name 'PLATFORM'
+                            values 'win'
+                        }
+                        axis {
+                            name 'TOOLCHAIN'
+                            values 'ubuntu-focal'
+                        }
+                    }
                 }
                 stages {
                     stage('Linux') {
                         when {
                             expression { env.PLATFORM == 'linux' }
                         }
-                        matrix {
-                            agent {
-                                label "${PLATFORM}-${TOOLCHAIN}-node"
-                            }                            
-                            axes {
-                                axis {
-                                    name 'TOOLCHAIN'
-                                    values 'ubuntu-focal'
+                        stages {
+                            stage('${PLATFORM}-Build') {
+                                steps {
+                                    echo 'Linux-Build ${PLATFORM}-${TOOLCHAIN}' 
                                 }
                             }
-                            stages {
-                                stage('${PLATFORM}-Build') {
-                                    steps {
-                                        echo 'Linux-Build ${PLATFORM}-${TOOLCHAIN}' 
-                                    }
+                            stage('${PLATFORM}-Test') {
+                                steps {
+                                    echo 'Linux-Test ${PLATFORM}-${TOOLCHAIN}' 
                                 }
-                                stage('${PLATFORM}-Test') {
-                                    steps {
-                                        echo 'Linux-Test ${PLATFORM}-${TOOLCHAIN}' 
-                                    }
-                                }
-                                stage('${PLATFORM}-Deploy') {
-                                    steps {
-                                        echo 'Linux-Deploy ${PLATFORM}-${TOOLCHAIN}' 
-                                    }
+                            }
+                            stage('${PLATFORM}-Deploy') {
+                                steps {
+                                    echo 'Linux-Deploy ${PLATFORM}-${TOOLCHAIN}' 
                                 }
                             }
                         }
@@ -57,31 +75,20 @@ pipeline {
                         when {
                             expression { env.PLATFORM == 'win' }
                         }
-                        matrix {
-                            agent {
-                                label "${PLATFORM}-${TOOLCHAIN}-node"
-                            }                            
-                            axes {
-                                axis {
-                                    name 'TOOLCHAIN'
-                                    values 'ubuntu-focal'
+                        stages {
+                            stage('${PLATFORM}-Build') {
+                                steps {
+                                    echo 'Win-Build ${PLATFORM}-${TOOLCHAIN}' 
                                 }
                             }
-                            stages {
-                                stage('${PLATFORM}-Build') {
-                                    steps {
-                                        echo 'Win-Build ${PLATFORM}-${TOOLCHAIN}' 
-                                    }
+                            stage('${PLATFORM}-Test') {
+                                steps {
+                                    echo 'Win-Test ${PLATFORM}-${TOOLCHAIN}' 
                                 }
-                                stage('${PLATFORM}-Test') {
-                                    steps {
-                                        echo 'Win-Test ${PLATFORM}-${TOOLCHAIN}' 
-                                    }
-                                }
-                                stage('${PLATFORM}-Deploy') {
-                                    steps {
-                                        echo 'Win-Deploy ${PLATFORM}-${TOOLCHAIN}' 
-                                    }
+                            }
+                            stage('${PLATFORM}-Deploy') {
+                                steps {
+                                    echo 'Win-Deploy ${PLATFORM}-${TOOLCHAIN}' 
                                 }
                             }
                         }
