@@ -54,17 +54,17 @@ pipeline {
                             expression { env.PLATFORM == 'linux' }
                         }
                         stages {
-                            stage('${PLATFORM}-Build') {
+                            stage('Linux-Build') {
                                 steps {
                                     echo 'Linux-Build ${PLATFORM}-${TOOLCHAIN}' 
                                 }
                             }
-                            stage('${PLATFORM}-Test') {
+                            stage('Linux-Test') {
                                 steps {
                                     echo 'Linux-Test ${PLATFORM}-${TOOLCHAIN}' 
                                 }
                             }
-                            stage('${PLATFORM}-Deploy') {
+                            stage('Linux-Deploy') {
                                 steps {
                                     echo 'Linux-Deploy ${PLATFORM}-${TOOLCHAIN}' 
                                 }
@@ -76,17 +76,17 @@ pipeline {
                             expression { env.PLATFORM == 'win' }
                         }
                         stages {
-                            stage('${PLATFORM}-Build') {
+                            stage('Win-Build') {
                                 steps {
                                     echo 'Win-Build ${PLATFORM}-${TOOLCHAIN}' 
                                 }
                             }
-                            stage('${PLATFORM}-Test') {
+                            stage('Win-Test') {
                                 steps {
                                     echo 'Win-Test ${PLATFORM}-${TOOLCHAIN}' 
                                 }
                             }
-                            stage('${PLATFORM}-Deploy') {
+                            stage('Win-Deploy') {
                                 steps {
                                     echo 'Win-Deploy ${PLATFORM}-${TOOLCHAIN}' 
                                 }
