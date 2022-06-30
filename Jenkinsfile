@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'rostopic --help'
+                sh 'cmake --version'
             }
         }
     }
