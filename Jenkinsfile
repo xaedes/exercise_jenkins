@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        docker { image 'ros:melodic-ros-base-bionic' }
+        docker { build '.' }
     }
     stages {
         stage('Test') {
