@@ -9,6 +9,7 @@ find_package(
     std_msgs
     sensor_msgs
     geometry_msgs
+    nodelet
 )
 catkin_package(
     LIBRARIES 
@@ -18,6 +19,7 @@ catkin_package(
     std_msgs 
     sensor_msgs 
     geometry_msgs 
+    nodelet
 )
 
 add_library(${LIBRARY_NAME} src/lib.cpp)
