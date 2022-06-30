@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'cmake --version'
+                sh 'export'
             }
         }
     }
