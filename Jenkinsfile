@@ -5,8 +5,8 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'source /opt/ros/melodic/setup.sh'
-                sh 'export | grep PATH'
+                sh 'sh source /opt/ros/melodic/setup.sh && export | grep PATH'
+                
             }
         }
     }
