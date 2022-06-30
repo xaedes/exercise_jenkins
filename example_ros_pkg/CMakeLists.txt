@@ -23,7 +23,7 @@ catkin_package(
 )
 
 add_library(${PROJECT_NAME} STATIC src/lib.cpp)
-
+target_include_directories(${PROJECT_NAME} PUBLIC include/)
 target_link_libraries(${PROJECT_NAME} catkin)
 
 # install library 
