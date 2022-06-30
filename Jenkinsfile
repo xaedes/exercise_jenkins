@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'export'
+                sh 'catkin_init_workspace'
             }
         }
     }
