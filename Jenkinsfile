@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'catkin_init_workspace'
+                sh 'find / 2> /dev/null '
             }
         }
     }
