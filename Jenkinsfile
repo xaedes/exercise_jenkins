@@ -9,7 +9,7 @@ pipeline {
                     source /opt/ros/melodic/setup.sh
                     export | grep PATH
                     catkin_init_workspace
-                    cmake -B build/ .
+                    cmake -B build/ -S .
                     cmake --build build/
                     source build/devel/setup.sh
                 '''
