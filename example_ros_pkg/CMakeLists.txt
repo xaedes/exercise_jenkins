@@ -22,14 +22,14 @@ catkin_package(
     nodelet
 )
 
-add_library(${LIBRARY_NAME} src/lib.cpp)
+add_library(${PROJECT_NAME} STATIC src/lib.cpp)
 
-target_link_libraries(${LIBRARY_NAME} catkin)
+target_link_libraries(${PROJECT_NAME} catkin)
 
 # install library 
 install(
     TARGETS 
-    ${LIBRARY_NAME}
+    ${PROJECT_NAME}
     ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
